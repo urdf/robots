@@ -1,0 +1,42 @@
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- AA BATTERY BOX (4×AA)                                           -->
+  <!-- Holder: ~62 × 52 × 22 mm; mounted under chassis                -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="battery_box">
+    <visual>
+      <geometry>
+        <box size="0.0806 0.0442 0.022"/>
+      </geometry>
+      <material name="battery">
+        <color rgba="0.12 0.12 0.14 1.00"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="battery_box_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="battery_box"/>
+    <!-- Z: chassis bottom (−1.5 mm) − half box (11 mm) = −12.5 mm -->
+    <origin xyz="0.0460 0.0000 -0.0120" rpy="0.0000 0.0000 0.0000"/>
+  </joint>
+
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- POWER BANK (cylindrical)                                              -->
+  <!-- ø16 mm × 92 mm; flush against chassis underside, spanning Y axis    -->
+  <!-- Z: chassis bottom (−1.5 mm) − radius (8 mm) = −9.5 mm              -->
+  <!-- Ground clearance: 21.5 mm − (9.5 + 8) = 4 mm                       -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="powerbank">
+    <visual>
+      <geometry>
+        <cylinder radius="0.0115" length="0.1199"/>
+      </geometry>
+      <material name="powerbank_blue">
+        <color rgba="0.15 0.45 0.85 1.00"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="powerbank_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="powerbank"/>
+    <origin xyz="-0.0350 0.0000 -0.0110" rpy="1.5708 0.0000 0.0000"/>
+  </joint>

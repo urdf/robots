@@ -1,0 +1,26 @@
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- CHASSIS                                                          -->
+  <!-- Clear acrylic base plate: 220 × 150 × 3 mm                     -->
+  <!-- Mesh: rounded body + curved front bumper arc (generated STL)   -->
+  <!-- Bumper at -X (front/camera-facing), rear at +X                 -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- base_link is the root reference frame (no visual) -->
+  <link name="base_link"/>
+
+  <!-- chassis is a child of base_link so the Inspector can select/scale it -->
+  <joint name="chassis_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="chassis"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="chassis">
+    <visual>
+      <geometry>
+        <mesh filename="chassis.stl" scale="1.00 1.05 1.00"/>
+      </geometry>
+      <material name="acrylic">
+        <color rgba="0.72 0.91 1.00 0.50"/>
+      </material>
+    </visual>
+  </link>

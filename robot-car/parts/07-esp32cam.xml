@@ -1,0 +1,128 @@
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- ESP32-CAM-MB  (ESP32-CAM module + USB programmer base board)    -->
+  <!-- Combined unit: ~27 mm (X) × 51 mm (Y) × 15 mm (Z)             -->
+  <!-- Mounted on top of chassis, front-center, camera facing -X       -->
+  <!-- rpy="0 0 1.5708": child +Y → robot -X, camera points forward   -->
+  <!--                                                                  -->
+  <!-- Sub-visuals (all relative to link origin = PCB centre):         -->
+  <!--   1. Programmer base PCB  — 27 × 51 × 1.6 mm  (black)         -->
+  <!--   2. ESP32-CAM module     — 27 × 38 × 4.5 mm  (dark green)     -->
+  <!--   3. Camera lens housing  — ø8 × 5 mm cyl      (dark grey)     -->
+  <!--   4. Antenna trace area   — 4 × 12 × 0.5 mm    (gold)          -->
+  <!--   5. USB-B micro port     — 7.5 × 5 × 3 mm     (silver)        -->
+  <!--   6. Reset / IO0 buttons  — 4 × 3 × 2 mm each  (black)         -->
+  <!--   7. Status LED           — ø1.8 mm × 1 mm     (red)           -->
+  <!--   8. Pin headers (2 rows) — 1 × 16 × 2.5 mm   (black)         -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="esp32_cam">
+
+    <!-- 1. Programmer base PCB (black) -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.027 0.051 0.0016"/></geometry>
+      <material name="pcb_black">
+        <color rgba="0.08 0.10 0.08 1.00"/>
+      </material>
+    </visual>
+
+    <!-- 2. ESP32-CAM module on top — sits at +Z from programmer PCB   -->
+    <!-- module bottom at z=+0.0008, top at z=+0.0008+0.0045=+0.0053  -->
+    <!-- module is slightly shorter in Y, centred, shifted to +Y side  -->
+    <visual>
+      <origin xyz="0 0.0065 0.0037" rpy="0 0 0"/>
+      <geometry><box size="0.027 0.038 0.0045"/></geometry>
+      <material name="pcb_cam_green">
+        <color rgba="0.06 0.22 0.10 1.00"/>
+      </material>
+    </visual>
+
+    <!-- 3. Camera lens housing — front edge of CAM module, centred X  -->
+    <!-- lens protrudes ~3 mm past the module's +Y edge                -->
+    <visual>
+      <origin xyz="0 0.0275 0.0055" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.004" length="0.005"/></geometry>
+      <material name="lens_dark">
+        <color rgba="0.10 0.10 0.12 1.00"/>
+      </material>
+    </visual>
+    <!-- inner lens glass (blue tint) -->
+    <visual>
+      <origin xyz="0 0.0272 0.0055" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.0025" length="0.001"/></geometry>
+      <material name="lens_glass">
+        <color rgba="0.20 0.30 0.60 0.85"/>
+      </material>
+    </visual>
+
+    <!-- 4. Antenna trace — narrow gold strip at far +Y end of module   -->
+    <visual>
+      <origin xyz="0 -0.0140 0.0055" rpy="0 0 0"/>
+      <geometry><box size="0.004 0.012 0.0005"/></geometry>
+      <material name="antenna_gold">
+        <color rgba="0.85 0.70 0.10 1.00"/>
+      </material>
+    </visual>
+
+    <!-- 5. Micro-USB port — on the -Y end of the programmer board      -->
+    <visual>
+      <origin xyz="0 -0.0270 0.0010" rpy="0 0 0"/>
+      <geometry><box size="0.0075 0.005 0.003"/></geometry>
+      <material name="usb_silver">
+        <color rgba="0.75 0.75 0.77 1.00"/>
+      </material>
+    </visual>
+
+    <!-- 6a. Reset button -->
+    <visual>
+      <origin xyz=" 0.0110 -0.0100 0.0020" rpy="0 0 0"/>
+      <geometry><box size="0.004 0.003 0.002"/></geometry>
+      <material name="btn_black">
+        <color rgba="0.15 0.15 0.15 1.00"/>
+      </material>
+    </visual>
+    <!-- 6b. IO0 button -->
+    <visual>
+      <origin xyz="-0.0110 -0.0100 0.0020" rpy="0 0 0"/>
+      <geometry><box size="0.004 0.003 0.002"/></geometry>
+      <material name="btn_black">
+        <color rgba="0.15 0.15 0.15 1.00"/>
+      </material>
+    </visual>
+
+    <!-- 7. Status LED (red) -->
+    <visual>
+      <origin xyz=" 0.0090 0.0050 0.0020" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.0009" length="0.001"/></geometry>
+      <material name="led_red">
+        <color rgba="1.00 0.05 0.05 1.00"/>
+      </material>
+    </visual>
+
+    <!-- 8a. Left pin header row -->
+    <visual>
+      <origin xyz="-0.0120 0.0060 0.0040" rpy="0 0 0"/>
+      <geometry><box size="0.0025 0.030 0.0050"/></geometry>
+      <material name="header_black">
+        <color rgba="0.10 0.10 0.10 1.00"/>
+      </material>
+    </visual>
+    <!-- 8b. Right pin header row -->
+    <visual>
+      <origin xyz=" 0.0120 0.0060 0.0040" rpy="0 0 0"/>
+      <geometry><box size="0.0025 0.030 0.0050"/></geometry>
+      <material name="header_black">
+        <color rgba="0.10 0.10 0.10 1.00"/>
+      </material>
+    </visual>
+
+  </link>
+
+  <joint name="esp32_cam_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="esp32_cam"/>
+    <!-- Top of chassis = +0.0015 m; PCB half-thickness = 0.0008 m          -->
+    <!-- rpy="0 0 1.5708": child +Y → robot -X, so camera faces forward      -->
+    <!-- Camera lens (link y=+0.0275) lands at robot X = -0.103 - 0.0275    -->
+    <!--   = -0.1305, roughly above the caster fork at X=-0.130              -->
+    <origin xyz="-0.103 0 0.0023" rpy="0 0 1.5708"/>
+  </joint>

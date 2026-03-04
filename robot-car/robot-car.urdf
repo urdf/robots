@@ -1,0 +1,304 @@
+<?xml version="1.0"?>
+<!--
+  Physical Agents OS — 2WD Robot Car
+  Dimensions sourced from manufacturer datasheets and verified product listings.
+
+  Coordinate convention (viewer-oriented, Z-up):
+    -X = forward (bumper / front)   X = rear
+    -Y = left                       Y = right
+     Z = up
+
+  Note: with -X as forward, RHR gives left = Z × (-X) = -Y.
+
+  Note: bumper is at -X so it faces the viewer's default camera
+  (Three.js camera dir (-1, 0.7, 1) → URDF -X side is camera-facing).
+
+  Component sources:
+    Chassis    — 220×150×3 mm acrylic (2WD kit, confirmed multiple sellers)
+    TT Motor   — 70×22×18 mm body, 10 mm shaft @ ø5.3 mm (Adafruit #3777)
+    Wheels     — ø65 mm × 25 mm rubber (Adafruit #3763)
+    Caster     — 20 mm total height, 15.7 mm ball (Adafruit #3948)
+    L298N      — 43×43×27.5 mm PCB + heatsink (Components101 datasheet)
+    ESP32-CAM  — 40×27×12 mm incl. camera assembly (DFRobot DFR0602)
+    HC-SR04    — 45×20×15 mm (SparkFun datasheet)
+    Power bank — ø35×92 mm cylinder (SIXTHGU, estimated)
+    9V battery — 62×27×22 mm holder (estimated)
+
+  All dimensions in meters.
+-->
+<robot name="robot-car">
+
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- CHASSIS                                                          -->
+  <!-- Clear acrylic base plate: 220 × 150 × 3 mm                     -->
+  <!-- Mesh: rounded body + curved front bumper arc (generated STL)   -->
+  <!-- Bumper at -X (front/camera-facing), rear at +X                 -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- base_link is the root reference frame (no visual) -->
+  <link name="base_link"/>
+
+  <!-- chassis is a child of base_link so the Inspector can select/scale it -->
+  <joint name="chassis_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="chassis"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="chassis">
+    <visual>
+      <geometry>
+        <mesh filename="chassis.stl" scale="1.07 0.90 1.00"/>
+      </geometry>
+      <material name="acrylic">
+        <color rgba="0.72 0.91 1.00 0.50"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- LEFT DRIVE MOTOR                                                 -->
+  <!-- Shaft → -Y (left wheel).  rpy R_x(PI) flips shaft +Y → -Y     -->
+  <!-- DC can stays along -X (front) because R_x doesn't affect X     -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="motor_left">
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14159 0 0"/>
+      <geometry><mesh filename="tt_gearbox.stl"/></geometry>
+      <material name="motor_yellow"><color rgba="1.00 0.85 0.00 1.00"/></material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14159 0 0"/>
+      <geometry><mesh filename="tt_can.stl"/></geometry>
+      <material name="motor_silver"><color rgba="0.72 0.72 0.75 1.00"/></material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="3.14159 0 0"/>
+      <geometry><mesh filename="tt_shaft.stl"/></geometry>
+      <material name="motor_dark"><color rgba="0.35 0.35 0.38 1.00"/></material>
+    </visual>
+  </link>
+  <joint name="motor_left_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="motor_left"/>
+    <origin xyz="0.0400 -0.0570 -0.0110" rpy="0.0000 0.0000 0.0000"/>
+  </joint>
+
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- RIGHT DRIVE MOTOR                                                -->
+  <!-- Shaft → +Y (right wheel).  No rotation needed.                 -->
+  <!-- DC can along -X (toward front bumper).                         -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="motor_right">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="tt_gearbox.stl"/></geometry>
+      <material name="motor_yellow"><color rgba="1.00 0.85 0.00 1.00"/></material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="tt_can.stl"/></geometry>
+      <material name="motor_silver"><color rgba="0.72 0.72 0.75 1.00"/></material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="tt_shaft.stl"/></geometry>
+      <material name="motor_dark"><color rgba="0.35 0.35 0.38 1.00"/></material>
+    </visual>
+  </link>
+  <joint name="motor_right_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="motor_right"/>
+    <origin xyz="0.0400 0.0570 -0.0110" rpy="0.0000 0.0000 0.0000"/>
+  </joint>
+
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- LEFT WHEEL                                                       -->
+  <!-- STL: base cyl R=31mm, tread blocks 16×4 raised to R=32.5mm, W=26mm -->
+  <!-- Yellow hub disc on outboard face (local +Z → world outboard for left wheel) -->
+  <!-- Shaft center at Z=+11 mm so car sits flat with swivel caster    -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="wheel_left">
+    <visual>
+      <geometry>
+        <mesh filename="wheel.stl"/>
+      </geometry>
+      <material name="rubber">
+        <color rgba="0.10 0.10 0.10 1.00"/>
+      </material>
+    </visual>
+    <!-- Yellow hub disc on the outboard face (local +Z = outboard for left wheel) -->
+    <visual>
+      <origin xyz="0 0 0.0075" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.022" length="0.012"/>
+      </geometry>
+      <material name="hub_yellow">
+        <color rgba="1.00 0.85 0.00 1.00"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="wheel_left_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_left"/>
+    <!-- rpy rotates cylinder from Z-axis to Y-axis so wheel spins around Y -->
+    <origin xyz="0.0400 -0.0810 -0.0110" rpy="1.5708 0.0000 0.0000"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.0" velocity="15.0"/>
+  </joint>
+
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- RIGHT WHEEL                                                      -->
+  <!-- Same STL as left wheel; hub at local −Z = outboard for right   -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="wheel_right">
+    <visual>
+      <geometry>
+        <mesh filename="wheel.stl"/>
+      </geometry>
+      <material name="rubber">
+        <color rgba="0.10 0.10 0.10 1.00"/>
+      </material>
+    </visual>
+    <!-- Yellow hub disc on the outboard face (local -Z = outboard for right wheel) -->
+    <visual>
+      <origin xyz="0 0 -0.0075" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.022" length="0.012"/>
+      </geometry>
+      <material name="hub_yellow">
+        <color rgba="1.00 0.85 0.00 1.00"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="wheel_right_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_right"/>
+    <origin xyz="0.0400 0.0810 -0.0110" rpy="1.5708 0.0000 0.0000"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.0" velocity="15.0"/>
+  </joint>
+
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- CASTER WHEEL ASSEMBLY (front-center, -X side)                   -->
+  <!-- Swivel caster: square mount plate + steel fork + rubber wheel   -->
+  <!-- Three parts share X/Y; stacked down from chassis underside      -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+
+  <!-- Mount plate: ~36×36×4 mm clear/steel -->
+  <link name="caster_plate">
+    <visual>
+      <geometry>
+        <box size="0.036 0.036 0.004"/>
+      </geometry>
+      <material name="caster_metal">
+        <color rgba="0.76 0.76 0.78 1.00"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="caster_plate_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_plate"/>
+    <origin xyz="-0.1300 0.0000 -0.0040" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Swivel fork: thin U-bracket, spans plate bottom → wheel center  -->
+  <!-- Height 8 mm: from plate bottom (−5 mm) to wheel center (−13.5 mm)-->
+  <link name="caster_fork">
+    <visual>
+      <geometry>
+        <box size="0.008 0.016 0.030"/>
+      </geometry>
+      <material name="caster_metal">
+        <color rgba="0.76 0.76 0.78 1.00"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="caster_fork_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_fork"/>
+    <origin xyz="-0.1300 0.0000 -0.0180" rpy="0.0000 0.0000 0.0000"/>
+  </joint>
+
+  <!-- Swivel wheel: rubber; dimensions × 1.21 from inspector calibration -->
+  <!-- continuous so it visually rolls when car moves                     -->
+  <link name="caster_wheel">
+    <visual>
+      <geometry>
+        <cylinder radius="0.0146" length="0.0145"/>
+      </geometry>
+      <material name="caster_rubber">
+        <color rgba="0.08 0.08 0.08 1.00"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="caster_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="caster_wheel"/>
+    <origin xyz="-0.1300 0.0000 -0.0320" rpy="1.5708 0.0000 0.0000"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- L298N DUAL H-BRIDGE MOTOR DRIVER                                 -->
+  <!-- PCB + heatsink: 43 × 43 × 27.5 mm (Components101 datasheet)    -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="l298n">
+    <visual>
+      <geometry>
+        <box size="0.0434 0.0533 0.0055"/>
+      </geometry>
+      <material name="pcb_red">
+        <color rgba="0.85 0.08 0.08 1.00"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="l298n_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="l298n"/>
+    <origin xyz="0.0500 0.0000 0.0050" rpy="0.0000 0.0000 0.0000"/>
+  </joint>
+
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- AA BATTERY BOX (4×AA)                                           -->
+  <!-- Holder: ~62 × 52 × 22 mm; mounted under chassis                -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="battery_box">
+    <visual>
+      <geometry>
+        <box size="0.0806 0.0442 0.022"/>
+      </geometry>
+      <material name="battery">
+        <color rgba="0.12 0.12 0.14 1.00"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="battery_box_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="battery_box"/>
+    <!-- Z: chassis bottom (−1.5 mm) − half box (11 mm) = −12.5 mm -->
+    <origin xyz="0.0460 0.0000 -0.0120" rpy="0.0000 0.0000 0.0000"/>
+  </joint>
+
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- POWER BANK (cylindrical)                                              -->
+  <!-- ø16 mm × 92 mm; flush against chassis underside, spanning Y axis    -->
+  <!-- Z: chassis bottom (−1.5 mm) − radius (8 mm) = −9.5 mm              -->
+  <!-- Ground clearance: 21.5 mm − (9.5 + 8) = 4 mm                       -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="powerbank">
+    <visual>
+      <geometry>
+        <cylinder radius="0.0115" length="0.1199"/>
+      </geometry>
+      <material name="powerbank_blue">
+        <color rgba="0.15 0.45 0.85 1.00"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="powerbank_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="powerbank"/>
+    <origin xyz="-0.0930 0.0000 -0.0110" rpy="1.5708 0.0000 0.0000"/>
+  </joint>
+
+</robot>

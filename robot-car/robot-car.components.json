@@ -1,0 +1,21 @@
+{
+  "chassis": {
+    "size_mm": [200, 120, 3],
+    "note": "Acrylic plate. Top surface Z=+0.0015 m, bottom Z=-0.0015 m. -X=front, +X=rear, -Y=left, +Y=right."
+  },
+  "components": {
+    "esp32cam-mb":   { "size_mm": [27,  51,  15], "note": "PRIMARY MCU. ESP32-CAM module on programmer base board. OV2640 camera, WiFi/BT, USB-C, onboard 5V reg." },
+    "hc-sr04":       { "size_mm": [45,  20,  15], "note": "Ultrasonic distance sensor, two ø16 mm cylinders" },
+    "l298n":         { "size_mm": [43,  43,  27], "note": "Dual H-bridge motor driver, tall heatsink" },
+    "sg90-servo":    { "size_mm": [22,  11,  28], "note": "Micro servo, output horn at +Z" },
+    "mpu-6050":      { "size_mm": [20,  16,  2],  "note": "6-axis IMU breakout board" },
+    "arduino-nano":  { "size_mm": [18,  45,  3],  "note": "ATmega328P dev board, USB mini" },
+    "arduino-uno":   { "size_mm": [68,  53,  15], "note": "ATmega328P dev board" },
+    "rpi-zero-2w":   { "size_mm": [65,  30,  5],  "note": "Raspberry Pi Zero 2W SBC" },
+    "rplidar-a1":    { "size_mm": [98,  98,  60], "note": "360° 2D LIDAR, approximately cylindrical" },
+    "9v-battery":    { "size_mm": [48,  26,  17], "note": "Standard 9V block battery" },
+    "18650-cell":    { "size_mm": [18,  18,  65], "note": "Li-ion 18650, diameter 18 mm" },
+    "oled-096":      { "size_mm": [27,  27,  4],  "note": "0.96\" 128×64 OLED display, I2C" },
+    "ir-sensor":     { "size_mm": [40,  10,  4],  "note": "IR obstacle/line sensor module" }
+  }
+}

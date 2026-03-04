@@ -1,0 +1,66 @@
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- LEFT WHEEL                                                       -->
+  <!-- STL: base cyl R=31mm, tread blocks 16×4 raised to R=32.5mm, W=26mm -->
+  <!-- Yellow hub disc on outboard face (local +Z → world outboard for left wheel) -->
+  <!-- Shaft center at Z=+11 mm so car sits flat with swivel caster    -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="wheel_left">
+    <visual>
+      <geometry>
+        <mesh filename="wheel.stl"/>
+      </geometry>
+      <material name="rubber">
+        <color rgba="0.10 0.10 0.10 1.00"/>
+      </material>
+    </visual>
+    <!-- Yellow hub disc on the outboard face (local +Z = outboard for left wheel) -->
+    <visual>
+      <origin xyz="0 0 0.0075" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.022" length="0.012"/>
+      </geometry>
+      <material name="hub_yellow">
+        <color rgba="1.00 0.85 0.00 1.00"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="wheel_left_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_left"/>
+    <!-- rpy rotates cylinder from Z-axis to Y-axis so wheel spins around Y -->
+    <origin xyz="0.0400 -0.0810 -0.0110" rpy="1.5708 0.0000 0.0000"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.0" velocity="15.0"/>
+  </joint>
+
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- RIGHT WHEEL                                                      -->
+  <!-- Same STL as left wheel; hub at local −Z = outboard for right   -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="wheel_right">
+    <visual>
+      <geometry>
+        <mesh filename="wheel.stl"/>
+      </geometry>
+      <material name="rubber">
+        <color rgba="0.10 0.10 0.10 1.00"/>
+      </material>
+    </visual>
+    <!-- Yellow hub disc on the outboard face (local -Z = outboard for right wheel) -->
+    <visual>
+      <origin xyz="0 0 -0.0075" rpy="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.022" length="0.012"/>
+      </geometry>
+      <material name="hub_yellow">
+        <color rgba="1.00 0.85 0.00 1.00"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="wheel_right_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="wheel_right"/>
+    <origin xyz="0.0400 0.0810 -0.0110" rpy="1.5708 0.0000 0.0000"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.0" velocity="15.0"/>
+  </joint>
