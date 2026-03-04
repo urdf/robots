@@ -66,6 +66,15 @@
       "up": "+Z",
       "urdf": "spryped/urdf/spryped.urdf",
       "package": "spryped_urdf_rev06"
+    },
+    {
+      "id": "franka_panda",
+      "name": "Franka Panda",
+      "label": "Panda",
+      "tags": ["arm", "7-dof", "research"],
+      "up": "+Z",
+      "urdf": "franka_panda/panda.urdf",
+      "package": "franka_panda"
     }
   ]
 }
