@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "robots": [
+    {
+      "id": "robot-car",
+      "name": "Robot Car",
+      "label": "Car",
+      "tags": ["wheeled", "parametric", "beginner"],
+      "up": "+Z",
+      "parts": "robot-car/robot-car"
+    },
+    {
+      "id": "T12",
+      "name": "T12",
+      "label": "T12",
+      "tags": ["hexapod", "legged"],
+      "up": "-Z",
+      "urdf": "T12/urdf/T12.URDF"
+    },
+    {
+      "id": "TriATHLETE",
+      "name": "TriATHLETE",
+      "label": "Tri",
+      "tags": ["wheeled-legged", "legged"],
+      "up": "-Z",
+      "urdf": "TriATHLETE/urdf/TriATHLETE.URDF"
+    },
+    {
+      "id": "laikago",
+      "name": "Laikago",
+      "label": "Laikago",
+      "tags": ["quadruped", "legged"],
+      "up": "+Z",
+      "urdf": "laikago/urdf/laikago.urdf"
+    },
+    {
+      "id": "open_manipulator_x",
+      "name": "OpenMANIPULATOR-X",
+      "label": "OM-X",
+      "tags": ["arm", "manipulator"],
+      "up": "+Z",
+      "urdf": "open_manipulator_x/open_manipulator_x.urdf",
+      "package": "open_manipulator_description"
+    },
+    {
+      "id": "so_arm100",
+      "name": "SO-ARM100",
+      "label": "SO-100",
+      "tags": ["arm", "manipulator"],
+      "up": "+Z",
+      "urdf": "so_arm100/so100.urdf"
+    },
+    {
+      "id": "simple_humanoid",
+      "name": "Simple Humanoid",
+      "label": "Humanoid",
+      "tags": ["humanoid", "legged", "beginner"],
+      "up": "+Z",
+      "urdf": "simple_humanoid/simple_humanoid.urdf"
+    },
+    {
+      "id": "spryped",
+      "name": "Spryped",
+      "label": "Spryped",
+      "tags": ["biped", "legged"],
+      "up": "+Z",
+      "urdf": "spryped/urdf/spryped.urdf",
+      "package": "spryped_urdf_rev06"
+    }
+  ]
+}

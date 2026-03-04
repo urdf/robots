@@ -1,0 +1,3 @@
+[submodule "example/public/robots"]
+	path = example/public/robots
+	url = https://github.com/urdf/robots.git
