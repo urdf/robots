@@ -41,9 +41,17 @@ def main():
             if not os.path.isfile(r['urdf']):
                 errors.append(f"[{rid}] urdf not found: {r['urdf']}")
         if 'parts' in r:
-            parts_json = r['parts'] + '.parts.json'
-            if not os.path.isfile(parts_json):
-                errors.append(f"[{rid}] parts manifest not found: {parts_json}")
+            parts_json_path = r['parts'] + '.parts.json'
+            if not os.path.isfile(parts_json_path):
+                errors.append(f"[{rid}] parts manifest not found: {parts_json_path}")
+            else:
+                with open(parts_json_path) as f:
+                    manifest = json.load(f)
+                # If contents are bundled, verify all parts are present
+                if 'contents' in manifest:
+                    for part in manifest.get('parts', []):
+                        if part not in manifest['contents']:
+                            errors.append(f"[{rid}] bundled contents missing part: {part} — run 'make bundle'")
 
     # Output
     for w in warnings:
