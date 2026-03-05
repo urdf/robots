@@ -23,4 +23,14 @@
         <color rgba="0.72 0.91 1.00 0.50"/>
       </material>
     </visual>
+    <!-- 220×150×3 mm acrylic plate ~0.15 kg; COM at chassis_joint origin -->
+    <inertial>
+      <mass value="0.15"/>
+      <inertia ixx="0.000281" ixy="0" ixz="0" iyy="0.000605" iyz="0" izz="0.000886"/>
+    </inertial>
+    <collision>
+      <geometry>
+        <box size="0.220 0.150 0.003"/>
+      </geometry>
+    </collision>
   </link>
