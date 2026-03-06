@@ -17,7 +17,7 @@ W       = 0.026    # wheel width (along Z)
 
 N_SEG   = 64       # polygon count for smooth base cylinder
 N_CIRC  = 16       # tread block columns around circumference
-N_WIDE  = 4        # tread block rows along width
+N_WIDE  = 7        # tread block rows along width
 BLOCK_ARC_FRAC = 0.58   # fraction of arc slot occupied by block
 BLOCK_Z_FRAC   = 0.62   # fraction of Z slot occupied by block
 
