@@ -83,7 +83,7 @@
         <cylinder radius="0.0146" length="0.0145"/>
       </geometry>
       <material name="caster_rubber">
-        <color rgba="0.08 0.08 0.08 1.00"/>
+        <color rgba="1.00 1.00 1.00 1.00"/>
       </material>
     </visual>
     <!-- small caster ~10 g -->
