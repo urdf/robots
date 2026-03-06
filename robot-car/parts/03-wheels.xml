@@ -15,7 +15,7 @@
     </visual>
     <!-- Yellow hub disc on the outboard face (local +Z = outboard for left wheel) -->
     <visual>
-      <origin xyz="0 0 0.013" rpy="0 0 0"/>
+      <origin xyz="0 0 0.015" rpy="0 0 0"/>
       <geometry>
         <cylinder radius="0.022" length="0.008"/>
       </geometry>
@@ -30,7 +30,7 @@
     </inertial>
     <collision>
       <geometry>
-        <cylinder radius="0.0325" length="0.026"/>
+        <cylinder radius="0.0325" length="0.030"/>
       </geometry>
     </collision>
   </link>
@@ -58,7 +58,7 @@
     </visual>
     <!-- Yellow hub disc on the outboard face (local -Z = outboard for right wheel) -->
     <visual>
-      <origin xyz="0 0 -0.013" rpy="0 0 0"/>
+      <origin xyz="0 0 -0.015" rpy="0 0 0"/>
       <geometry>
         <cylinder radius="0.022" length="0.008"/>
       </geometry>
@@ -73,7 +73,7 @@
     </inertial>
     <collision>
       <geometry>
-        <cylinder radius="0.0325" length="0.026"/>
+        <cylinder radius="0.0325" length="0.030"/>
       </geometry>
     </collision>
   </link>

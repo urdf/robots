@@ -3,7 +3,7 @@
 
 Axis: Z  (matches URDF <cylinder> convention — the joint's rpy handles orientation)
 Center: origin
-Outer radius: 32.5 mm   Width: 15 mm
+Outer radius: 32.5 mm   Width: 30 mm
 Tread: 16 columns × 4 rows of raised rectangular blocks (1.5 mm proud)
 """
 
@@ -13,7 +13,7 @@ import numpy as np
 # ─── Dimensions ───────────────────────────────────────────────────────────────
 R_OUTER = 0.0325   # full outer radius (top of tread)
 R_BASE  = 0.0310   # base cylinder radius
-W       = 0.026    # wheel width (along Z)
+W       = 0.030    # wheel width (along Z)
 
 N_SEG   = 64       # polygon count for smooth base cylinder
 N_CIRC  = 16       # tread block columns around circumference
