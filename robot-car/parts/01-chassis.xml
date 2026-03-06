@@ -17,7 +17,7 @@
   <link name="chassis">
     <visual>
       <geometry>
-        <mesh filename="chassis.stl" scale="1.00 1.05 1.00"/>
+        <mesh filename="chassis.stl"/>
       </geometry>
       <material name="acrylic">
         <color rgba="0.72 0.91 1.00 0.50"/>

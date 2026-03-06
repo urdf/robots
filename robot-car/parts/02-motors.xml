@@ -38,17 +38,17 @@
   <!-- ─────────────────────────────────────────────────────────────── -->
   <link name="motor_right">
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0"/>
       <geometry><mesh filename="tt_gearbox.stl"/></geometry>
       <material name="motor_yellow"><color rgba="1.00 0.85 0.00 1.00"/></material>
     </visual>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0"/>
       <geometry><mesh filename="tt_can.stl"/></geometry>
       <material name="motor_silver"><color rgba="0.72 0.72 0.75 1.00"/></material>
     </visual>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0"/>
       <geometry><mesh filename="tt_shaft.stl"/></geometry>
       <material name="motor_dark"><color rgba="0.35 0.35 0.38 1.00"/></material>
     </visual>

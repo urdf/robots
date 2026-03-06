@@ -17,7 +17,7 @@
         <color rgba="0.76 0.76 0.78 1.00"/>
       </material>
     </visual>
-    <!-- steel plate ~15 g; 36×36×4 mm box -->
+    <!-- aluminium plate ~15 g; 36×36×4 mm box -->
     <inertial>
       <mass value="0.015"/>
       <inertia ixx="1.64e-6" ixy="0" ixz="0" iyy="1.64e-6" iyz="0" izz="3.24e-6"/>
@@ -39,7 +39,7 @@
         <color rgba="0.76 0.76 0.78 1.00"/>
       </material>
     </visual>
-    <!-- steel fork ~8 g; 8×16×30 mm box -->
+    <!-- plastic fork ~8 g; 8×16×30 mm box -->
     <inertial>
       <mass value="0.008"/>
       <inertia ixx="7.71e-7" ixy="0" ixz="0" iyy="6.43e-7" iyz="0" izz="2.13e-7"/>

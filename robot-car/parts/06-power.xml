@@ -1,6 +1,6 @@
   <!-- ─────────────────────────────────────────────────────────────── -->
   <!-- AA BATTERY BOX (4×AA)                                           -->
-  <!-- Holder: ~62 × 52 × 22 mm; mounted under chassis                -->
+  <!-- Holder: ~80 × 44 × 22 mm; mounted under chassis                -->
   <!-- ─────────────────────────────────────────────────────────────── -->
   <link name="battery_box">
     <visual>
@@ -11,6 +11,11 @@
         <color rgba="0.12 0.12 0.14 1.00"/>
       </material>
     </visual>
+    <!-- 4×AA + holder ~110 g; 80.6×44.2×22 mm box -->
+    <inertial>
+      <mass value="0.110"/>
+      <inertia ixx="2.23e-5" ixy="0" ixz="0" iyy="6.40e-5" iyz="0" izz="7.75e-5"/>
+    </inertial>
   </link>
   <joint name="battery_box_joint" type="fixed">
     <parent link="base_link"/>
@@ -21,9 +26,8 @@
 
   <!-- ─────────────────────────────────────────────────────────────── -->
   <!-- POWER BANK (cylindrical)                                              -->
-  <!-- ø16 mm × 92 mm; flush against chassis underside, spanning Y axis    -->
-  <!-- Z: chassis bottom (−1.5 mm) − radius (8 mm) = −9.5 mm              -->
-  <!-- Ground clearance: 21.5 mm − (9.5 + 8) = 4 mm                       -->
+  <!-- ø23 mm × 120 mm; flush against chassis underside, spanning Y axis   -->
+  <!-- Z: chassis bottom (−1.5 mm) − radius (11.5 mm) = −13 mm (≈ −11 mm) -->
   <!-- ─────────────────────────────────────────────────────────────── -->
   <link name="powerbank">
     <visual>
@@ -34,6 +38,11 @@
         <color rgba="0.15 0.45 0.85 1.00"/>
       </material>
     </visual>
+    <!-- power bank ~60 g; cylinder r=11.5 mm, l=120 mm -->
+    <inertial>
+      <mass value="0.060"/>
+      <inertia ixx="7.39e-5" ixy="0" ixz="0" iyy="7.39e-5" iyz="0" izz="3.97e-6"/>
+    </inertial>
   </link>
   <joint name="powerbank_joint" type="fixed">
     <parent link="base_link"/>

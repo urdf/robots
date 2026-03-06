@@ -1,0 +1,51 @@
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- HC-SR04 ULTRASONIC DISTANCE SENSOR                             -->
+  <!-- PCB: 45 × 20 × 2 mm; two ø16 mm transducer cylinders         -->
+  <!-- Mounted on front bumper (-X face), transducers facing forward  -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="hcsr04">
+
+    <!-- PCB (green) — 2 mm thick, normal along X (faces -X in world) -->
+    <visual>
+      <origin xyz="0.001 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.002 0.045 0.020"/></geometry>
+      <material name="pcb_green">
+        <color rgba="0.07 0.35 0.07 1.00"/>
+      </material>
+    </visual>
+
+    <!-- Left transducer (−Y) — ø16 mm × 12 mm, protrudes in −X -->
+    <visual>
+      <origin xyz="-0.006 -0.014 0" rpy="0 1.5708 0"/>
+      <geometry><cylinder radius="0.008" length="0.012"/></geometry>
+      <material name="transducer_silver">
+        <color rgba="0.78 0.78 0.80 1.00"/>
+      </material>
+    </visual>
+
+    <!-- Right transducer (+Y) -->
+    <visual>
+      <origin xyz="-0.006 0.014 0" rpy="0 1.5708 0"/>
+      <geometry><cylinder radius="0.008" length="0.012"/></geometry>
+      <material name="transducer_silver">
+        <color rgba="0.78 0.78 0.80 1.00"/>
+      </material>
+    </visual>
+
+    <collision>
+      <origin xyz="-0.006 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.015 0.045 0.020"/></geometry>
+    </collision>
+
+    <!-- HC-SR04 ~10 g; approximated as 45×20×2 mm PCB -->
+    <inertial>
+      <mass value="0.010"/>
+      <inertia ixx="2.02e-6" ixy="0" ixz="0" iyy="3.37e-7" iyz="0" izz="1.69e-6"/>
+    </inertial>
+  </link>
+
+  <joint name="hcsr04_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="hcsr04"/>
+    <origin xyz="-0.110 0.000 0.009" rpy="0 0 0"/>
+  </joint>

@@ -8,6 +8,7 @@
     "04-caster.xml",
     "05-motor-driver.xml",
     "06-power.xml",
-    "07-esp32cam.xml"
+    "07-esp32cam.xml",
+    "08-hcsr04.xml"
   ]
 }

@@ -70,6 +70,11 @@
       </material>
     </visual>
 
+    <!-- L298N module ~25 g; approximated as 43×43×27.5 mm box -->
+    <inertial>
+      <mass value="0.025"/>
+      <inertia ixx="5.43e-6" ixy="0" ixz="0" iyy="5.43e-6" iyz="0" izz="7.70e-6"/>
+    </inertial>
   </link>
 
   <joint name="l298n_joint" type="fixed">
