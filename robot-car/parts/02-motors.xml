@@ -19,6 +19,11 @@
       <geometry><mesh filename="tt_shaft.stl"/></geometry>
       <material name="motor_dark"><color rgba="0.35 0.35 0.38 1.00"/></material>
     </visual>
+    <!-- TT motor ~40 g; box approx 36×22×18 mm -->
+    <inertial>
+      <mass value="0.040"/>
+      <inertia ixx="2.69e-6" ixy="0" ixz="0" iyy="5.40e-6" iyz="0" izz="5.93e-6"/>
+    </inertial>
   </link>
   <joint name="motor_left_joint" type="fixed">
     <parent link="base_link"/>
@@ -47,6 +52,11 @@
       <geometry><mesh filename="tt_shaft.stl"/></geometry>
       <material name="motor_dark"><color rgba="0.35 0.35 0.38 1.00"/></material>
     </visual>
+    <!-- same mass/inertia as motor_left -->
+    <inertial>
+      <mass value="0.040"/>
+      <inertia ixx="2.69e-6" ixy="0" ixz="0" iyy="5.40e-6" iyz="0" izz="5.93e-6"/>
+    </inertial>
   </link>
   <joint name="motor_right_joint" type="fixed">
     <parent link="base_link"/>
