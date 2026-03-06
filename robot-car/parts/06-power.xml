@@ -26,23 +26,23 @@
 
   <!-- ─────────────────────────────────────────────────────────────── -->
   <!-- POWER BANK (cylindrical)                                              -->
-  <!-- ø35 mm × 92 mm; flush against chassis underside, spanning Y axis    -->
+  <!-- ø35 mm × 130 mm; flush against chassis underside, spanning Y axis   -->
   <!-- Z: chassis bottom (−1.5 mm) − radius (17.5 mm) = −19 mm            -->
   <!-- Ground clearance: 43.5 mm − 36.5 mm = 7 mm                         -->
   <!-- ─────────────────────────────────────────────────────────────── -->
   <link name="powerbank">
     <visual>
       <geometry>
-        <cylinder radius="0.0175" length="0.092"/>
+        <cylinder radius="0.0175" length="0.130"/>
       </geometry>
       <material name="powerbank_blue">
         <color rgba="0.15 0.45 0.85 1.00"/>
       </material>
     </visual>
-    <!-- power bank ~60 g; cylinder r=17.5 mm, l=92 mm -->
+    <!-- power bank ~60 g; cylinder r=17.5 mm, l=130 mm -->
     <inertial>
       <mass value="0.060"/>
-      <inertia ixx="4.69e-5" ixy="0" ixz="0" iyy="4.69e-5" iyz="0" izz="9.19e-6"/>
+      <inertia ixx="8.91e-5" ixy="0" ixz="0" iyy="8.91e-5" iyz="0" izz="9.19e-6"/>
     </inertial>
   </link>
   <joint name="powerbank_joint" type="fixed">
