@@ -1,6 +1,6 @@
   <!-- ─────────────────────────────────────────────────────────────── -->
   <!-- LEFT WHEEL                                                       -->
-  <!-- STL: base cyl R=31mm, tread blocks 16×4 raised to R=32.5mm, W=15mm -->
+  <!-- STL: base cyl R=31mm, tread blocks 16×4 raised to R=32.5mm, W=26mm -->
   <!-- Yellow hub disc on outboard face (local +Z → world outboard for left wheel) -->
   <!-- Shaft center at Z=+11 mm so car sits flat with swivel caster    -->
   <!-- ─────────────────────────────────────────────────────────────── -->
@@ -15,9 +15,9 @@
     </visual>
     <!-- Yellow hub disc on the outboard face (local +Z = outboard for left wheel) -->
     <visual>
-      <origin xyz="0 0 0.0075" rpy="0 0 0"/>
+      <origin xyz="0 0 0.013" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.022" length="0.012"/>
+        <cylinder radius="0.022" length="0.008"/>
       </geometry>
       <material name="hub_yellow">
         <color rgba="1.00 0.85 0.00 1.00"/>
@@ -58,9 +58,9 @@
     </visual>
     <!-- Yellow hub disc on the outboard face (local -Z = outboard for right wheel) -->
     <visual>
-      <origin xyz="0 0 -0.0075" rpy="0 0 0"/>
+      <origin xyz="0 0 -0.013" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.022" length="0.012"/>
+        <cylinder radius="0.022" length="0.008"/>
       </geometry>
       <material name="hub_yellow">
         <color rgba="1.00 0.85 0.00 1.00"/>

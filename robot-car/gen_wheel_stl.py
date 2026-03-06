@@ -13,7 +13,7 @@ import numpy as np
 # ─── Dimensions ───────────────────────────────────────────────────────────────
 R_OUTER = 0.0325   # full outer radius (top of tread)
 R_BASE  = 0.0310   # base cylinder radius
-W       = 0.015    # wheel width (along Z)
+W       = 0.026    # wheel width (along Z)
 
 N_SEG   = 64       # polygon count for smooth base cylinder
 N_CIRC  = 16       # tread block columns around circumference
