@@ -70,6 +70,24 @@
       </material>
     </visual>
 
+    <!-- L298N IC body (Multiwatt15 package, between PCB and heatsink) -->
+    <visual>
+      <origin xyz="0 0.003 0.0033" rpy="0 0 0"/>
+      <geometry><box size="0.022 0.017 0.005"/></geometry>
+      <material name="ic_black">
+        <color rgba="0.12 0.12 0.14 1.00"/>
+      </material>
+    </visual>
+
+    <!-- Enable/PWM input pin header (1×7 row along rear edge) -->
+    <visual>
+      <origin xyz="0 0.0185 0.0028" rpy="0 0 0"/>
+      <geometry><box size="0.034 0.005 0.006"/></geometry>
+      <material name="header_black">
+        <color rgba="0.10 0.10 0.10 1.00"/>
+      </material>
+    </visual>
+
     <!-- L298N module ~25 g; approximated as 43×43×27.5 mm box -->
     <inertial>
       <mass value="0.025"/>

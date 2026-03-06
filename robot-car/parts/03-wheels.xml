@@ -23,14 +23,14 @@
         <color rgba="1.00 0.85 0.00 1.00"/>
       </material>
     </visual>
-    <!-- ø65 mm × 15 mm rubber wheel ~40 g; axis along local Z (world Y after rpy) -->
+    <!-- ø65 mm × 26 mm rubber wheel ~40 g; axis along local Z (world Y after rpy) -->
     <inertial>
       <mass value="0.040"/>
-      <inertia ixx="1.13e-5" ixy="0" ixz="0" iyy="1.13e-5" iyz="0" izz="2.11e-5"/>
+      <inertia ixx="1.28e-5" ixy="0" ixz="0" iyy="1.28e-5" iyz="0" izz="2.11e-5"/>
     </inertial>
     <collision>
       <geometry>
-        <cylinder radius="0.0325" length="0.015"/>
+        <cylinder radius="0.0325" length="0.026"/>
       </geometry>
     </collision>
   </link>
@@ -69,11 +69,11 @@
     <!-- same geometry as left wheel -->
     <inertial>
       <mass value="0.040"/>
-      <inertia ixx="1.13e-5" ixy="0" ixz="0" iyy="1.13e-5" iyz="0" izz="2.11e-5"/>
+      <inertia ixx="1.28e-5" ixy="0" ixz="0" iyy="1.28e-5" iyz="0" izz="2.11e-5"/>
     </inertial>
     <collision>
       <geometry>
-        <cylinder radius="0.0325" length="0.015"/>
+        <cylinder radius="0.0325" length="0.026"/>
       </geometry>
     </collision>
   </link>

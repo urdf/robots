@@ -12,6 +12,7 @@
   <!--   5. USB-B micro port     — 7.5 × 5 × 3 mm     (silver)        -->
   <!--   6. Reset / IO0 buttons  — 4 × 3 × 2 mm each  (black)         -->
   <!--   7. Status LED           — ø1.8 mm × 1 mm     (red)           -->
+  <!--   7b. Flash LED           — 5 × 5 × 2 mm       (white)         -->
   <!--   8. Pin headers (2 rows) — 1 × 16 × 2.5 mm   (black)         -->
   <!-- ─────────────────────────────────────────────────────────────── -->
   <link name="esp32_cam">
@@ -37,10 +38,10 @@
     </visual>
 
     <!-- 3. Camera lens housing — front edge of CAM module, centred X  -->
-    <!-- lens protrudes ~3 mm past the module's +Y edge                -->
+    <!-- OV2640 M7 lens: ø5.6 mm; protrudes ~3 mm past module +Y edge -->
     <visual>
       <origin xyz="0 0.0275 0.0055" rpy="1.5708 0 0"/>
-      <geometry><cylinder radius="0.004" length="0.005"/></geometry>
+      <geometry><cylinder radius="0.0028" length="0.005"/></geometry>
       <material name="lens_dark">
         <color rgba="0.10 0.10 0.12 1.00"/>
       </material>
@@ -48,7 +49,7 @@
     <!-- inner lens glass (blue tint) -->
     <visual>
       <origin xyz="0 0.0272 0.0055" rpy="1.5708 0 0"/>
-      <geometry><cylinder radius="0.0025" length="0.001"/></geometry>
+      <geometry><cylinder radius="0.0016" length="0.001"/></geometry>
       <material name="lens_glass">
         <color rgba="0.20 0.30 0.60 0.85"/>
       </material>
@@ -95,6 +96,15 @@
       <geometry><cylinder radius="0.0009" length="0.001"/></geometry>
       <material name="led_red">
         <color rgba="1.00 0.05 0.05 1.00"/>
+      </material>
+    </visual>
+
+    <!-- 7b. Flash LED (white, 5×5 mm, prominent night-vision LED adjacent to lens) -->
+    <visual>
+      <origin xyz="-0.008 0.022 0.0060" rpy="0 0 0"/>
+      <geometry><box size="0.005 0.005 0.002"/></geometry>
+      <material name="led_flash">
+        <color rgba="0.95 0.95 0.95 1.00"/>
       </material>
     </visual>
 

@@ -1,13 +1,16 @@
   <!-- ─────────────────────────────────────────────────────────────── -->
   <!-- CASTER WHEEL ASSEMBLY (front-center, -X side)                   -->
-  <!-- Swivel caster: square mount plate + steel fork + rubber wheel   -->
-  <!-- Three parts share X/Y; stacked down from chassis underside      -->
-  <!-- Floor plane: base_link Z=0, drive wheels center at Z=-0.0110,  -->
+  <!-- Swivel caster: square mount plate + U-fork + rubber wheel       -->
+  <!-- Joint hierarchy: base_link → caster_plate (fixed)              -->
+  <!--                  caster_plate → caster_fork (continuous, Z)    -->
+  <!--                  caster_fork → caster_wheel (continuous, roll) -->
+  <!-- Floor plane: drive wheels center at Z=-0.0110,                 -->
   <!--   radius=0.0325 → floor at Z=-0.0435.                          -->
-  <!-- Caster wheel radius=0.0146 → center must sit at Z=-0.0289      -->
+  <!-- Caster wheel radius=0.0146 → center at Z=-0.0289 in world      -->
+  <!--   fork origin at Z=-0.006 → wheel offset -0.0229 from fork     -->
   <!-- ─────────────────────────────────────────────────────────────── -->
 
-  <!-- Mount plate: ~36×36×4 mm clear/steel -->
+  <!-- Mount plate: ~36×36×4 mm aluminium -->
   <link name="caster_plate">
     <visual>
       <geometry>
@@ -29,30 +32,51 @@
     <origin xyz="-0.1200 0.0000 -0.0040" rpy="0 0 0"/>
   </joint>
 
-  <!-- Swivel fork: thin U-bracket -->
+  <!-- Swivel fork: U-bracket (two side arms + top crossbar)          -->
+  <!-- Origin at swivel pin = bottom face of plate (Z=-0.006 world)   -->
   <link name="caster_fork">
+    <!-- Left arm (-Y side) -->
     <visual>
-      <geometry>
-        <box size="0.008 0.016 0.030"/>
-      </geometry>
+      <origin xyz="0 -0.0093 -0.0115" rpy="0 0 0"/>
+      <geometry><box size="0.006 0.002 0.023"/></geometry>
       <material name="caster_metal">
         <color rgba="0.76 0.76 0.78 1.00"/>
       </material>
     </visual>
-    <!-- plastic fork ~8 g; 8×16×30 mm box -->
+    <!-- Right arm (+Y side) -->
+    <visual>
+      <origin xyz="0 0.0093 -0.0115" rpy="0 0 0"/>
+      <geometry><box size="0.006 0.002 0.023"/></geometry>
+      <material name="caster_metal">
+        <color rgba="0.76 0.76 0.78 1.00"/>
+      </material>
+    </visual>
+    <!-- Top crossbar -->
+    <visual>
+      <origin xyz="0 0 -0.001" rpy="0 0 0"/>
+      <geometry><box size="0.006 0.020 0.002"/></geometry>
+      <material name="caster_metal">
+        <color rgba="0.76 0.76 0.78 1.00"/>
+      </material>
+    </visual>
+    <!-- plastic fork ~8 g -->
     <inertial>
       <mass value="0.008"/>
       <inertia ixx="7.71e-7" ixy="0" ixz="0" iyy="6.43e-7" iyz="0" izz="2.13e-7"/>
     </inertial>
   </link>
-  <joint name="caster_fork_joint" type="fixed">
-    <parent link="base_link"/>
+  <!-- Swivel joint: fork rotates around vertical Z at plate bottom -->
+  <joint name="caster_fork_joint" type="continuous">
+    <parent link="caster_plate"/>
     <child link="caster_fork"/>
-    <origin xyz="-0.1200 0.0000 -0.0149" rpy="0.0000 0.0000 0.0000"/>
+    <origin xyz="0 0 -0.002" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
   </joint>
 
-  <!-- Swivel wheel: radius=14.6 mm, center at Z=-0.0289 so bottom     -->
-  <!-- touches floor at Z=-0.0435, same as drive wheels                 -->
+  <!-- Swivel wheel: radius=14.6 mm, length=14.5 mm                   -->
+  <!-- In fork frame: center at Z=-0.0229                              -->
+  <!-- In world frame: -0.006 (fork) + -0.0229 = -0.0289             -->
+  <!-- Bottom touches floor at -0.0435, same as drive wheels           -->
   <link name="caster_wheel">
     <visual>
       <geometry>
@@ -74,9 +98,9 @@
     </collision>
   </link>
   <joint name="caster_wheel_joint" type="continuous">
-    <parent link="base_link"/>
+    <parent link="caster_fork"/>
     <child link="caster_wheel"/>
-    <origin xyz="-0.1200 0.0000 -0.0289" rpy="1.5708 0.0000 0.0000"/>
+    <origin xyz="0 0 -0.0229" rpy="1.5708 0.0000 0.0000"/>
     <axis xyz="0 0 1"/>
     <limit effort="1.0" velocity="15.0"/>
   </joint>
