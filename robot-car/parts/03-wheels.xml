@@ -38,7 +38,7 @@
     <parent link="base_link"/>
     <child link="wheel_left"/>
     <!-- rpy rotates cylinder from Z-axis to Y-axis so wheel spins around Y -->
-    <origin xyz="0.0400 -0.0900 -0.0110" rpy="1.5708 0.0000 0.0000"/>
+    <origin xyz="0.0400 -0.0870 -0.0110" rpy="1.5708 0.0000 0.0000"/>
     <axis xyz="0 0 1"/>
     <limit effort="2.0" velocity="15.0"/>
   </joint>
@@ -80,7 +80,7 @@
   <joint name="wheel_right_joint" type="continuous">
     <parent link="base_link"/>
     <child link="wheel_right"/>
-    <origin xyz="0.0400 0.0900 -0.0110" rpy="1.5708 0.0000 0.0000"/>
+    <origin xyz="0.0400 0.0870 -0.0110" rpy="1.5708 0.0000 0.0000"/>
     <axis xyz="0 0 1"/>
     <limit effort="2.0" velocity="15.0"/>
   </joint>

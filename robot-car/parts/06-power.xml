@@ -48,5 +48,5 @@
   <joint name="powerbank_joint" type="fixed">
     <parent link="base_link"/>
     <child link="powerbank"/>
-    <origin xyz="-0.0350 0.0000 -0.0130" rpy="1.5708 0.0000 0.0000"/>
+    <origin xyz="-0.0350 0.0000 -0.0180" rpy="1.5708 0.0000 0.0000"/>
   </joint>
