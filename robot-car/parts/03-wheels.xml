@@ -17,7 +17,7 @@
     <visual>
       <origin xyz="0 0 0.015" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.022" length="0.008"/>
+        <cylinder radius="0.022" length="0.001"/>
       </geometry>
       <material name="hub_yellow">
         <color rgba="1.00 0.85 0.00 1.00"/>
@@ -60,7 +60,7 @@
     <visual>
       <origin xyz="0 0 -0.015" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.022" length="0.008"/>
+        <cylinder radius="0.022" length="0.001"/>
       </geometry>
       <material name="hub_yellow">
         <color rgba="1.00 0.85 0.00 1.00"/>
