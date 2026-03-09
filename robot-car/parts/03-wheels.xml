@@ -10,7 +10,7 @@
         <mesh filename="wheel.stl"/>
       </geometry>
       <material name="rubber">
-        <color rgba="0.10 0.10 0.10 1.00"/>
+        <color rgba="0.03 0.03 0.03 1.00"/>
       </material>
     </visual>
     <!-- Yellow hub disc on the outboard face (local +Z = outboard for left wheel) -->
@@ -53,7 +53,7 @@
         <mesh filename="wheel.stl"/>
       </geometry>
       <material name="rubber">
-        <color rgba="0.10 0.10 0.10 1.00"/>
+        <color rgba="0.03 0.03 0.03 1.00"/>
       </material>
     </visual>
     <!-- Yellow hub disc on the outboard face (local -Z = outboard for right wheel) -->
