@@ -75,6 +75,15 @@
       "up": "+Z",
       "urdf": "franka_panda/panda.urdf",
       "package": "franka_panda"
+    },
+    {
+      "id": "orca_hand",
+      "name": "ORCA Hand",
+      "label": "ORCA",
+      "tags": ["hand", "dexterous", "17-dof", "research"],
+      "up": "+Z",
+      "urdf": "orca_hand/orcahand_right.urdf",
+      "package": "orcahand_description"
     }
   ]
 }
