@@ -1,0 +1,174 @@
+{
+  "_meta": {
+    "robot": "ORCA Hand (right)",
+    "urdf": "orcahand_right.urdf",
+    "source": "Inertial data extracted from URDF. Dynamics (damping, tendon coupling) are estimated — URDF specifies none.",
+    "total_mass_kg": 1.13473,
+    "hand_mass_kg": 0.2313,
+    "tower_mass_kg": 0.9,
+    "dof": 17
+  },
+
+  "actuation": {
+    "type": "tendon_driven",
+    "motors": "Not specified in URDF",
+    "coupling": {
+      "description": "Anthropomorphic tendon hands typically couple MCP and PIP of the same finger on a shared flexion tendon. Extension is via antagonist tendon or elastic return.",
+      "mcp_pip_flex_ratio": "~1.0 : 0.7 (MCP drives PIP at 70% of its excursion — estimated, not encoded in URDF)",
+      "independence": "ABD joints are typically independent of flex tendons"
+    },
+    "effort_limit_note": "URDF effort=100 Nm on all joints is a placeholder. Realistic torques: 0.5–2 Nm for index/middle flex, 0.3–1.5 Nm for ring/pinky flex, 1–3 Nm for wrist."
+  },
+
+  "dynamics": {
+    "note": "No damping or friction defined in URDF. Values below are estimates for a hand of this size and actuation class.",
+    "wrist":      { "damping_Nms_per_rad": 0.010, "friction_Nm": 0.002 },
+    "finger_abd": { "damping_Nms_per_rad": 0.003, "friction_Nm": 0.001 },
+    "finger_mcp": { "damping_Nms_per_rad": 0.003, "friction_Nm": 0.001 },
+    "finger_pip": { "damping_Nms_per_rad": 0.002, "friction_Nm": 0.0005 },
+    "thumb_mcp":  { "damping_Nms_per_rad": 0.004, "friction_Nm": 0.001 },
+    "thumb_abd":  { "damping_Nms_per_rad": 0.003, "friction_Nm": 0.001 },
+    "thumb_pip":  { "damping_Nms_per_rad": 0.003, "friction_Nm": 0.001 },
+    "thumb_dip":  { "damping_Nms_per_rad": 0.002, "friction_Nm": 0.0005 }
+  },
+
+  "joints": {
+    "right_wrist": {
+      "axis": [1, 0, 0],
+      "lower_rad": -0.6736, "upper_rad": 0.8972,
+      "role": "wrist flexion/extension",
+      "parent": "right_tower", "child_link": "right_palm"
+    },
+    "right_thumb_mcp": {
+      "axis": [0, 0, -1],
+      "lower_rad": -0.87266, "upper_rad": 0.87266,
+      "role": "thumb MCP flexion/extension",
+      "parent": "right_palm"
+    },
+    "right_thumb_abd": {
+      "axis": [0, 0.34202, 0.93969],
+      "lower_rad": -1.08211, "upper_rad": 0.0,
+      "role": "thumb abduction (tilted axis — 20° from palm Z)",
+      "parent": "right_thumb_mp"
+    },
+    "right_thumb_pip": {
+      "axis": [0, -1, 0],
+      "lower_rad": -0.7944, "upper_rad": 1.23,
+      "role": "thumb PIP flexion/extension",
+      "parent": "right_thumb_pp"
+    },
+    "right_thumb_dip": {
+      "axis": [0, -1, 0],
+      "lower_rad": -0.85384, "upper_rad": 1.45,
+      "role": "thumb DIP flexion/extension",
+      "parent": "right_thumb_ip"
+    },
+    "right_index_abd": {
+      "axis": [0, 0, -1],
+      "lower_rad": -1.04577, "upper_rad": 0.24577,
+      "role": "index abduction/adduction",
+      "parent": "right_palm"
+    },
+    "right_index_mcp": {
+      "axis": [0, -1, 0],
+      "lower_rad": -0.34907, "upper_rad": 1.65806,
+      "role": "index MCP flexion/extension",
+      "parent": "right_index_mp"
+    },
+    "right_index_pip": {
+      "axis": [0, -1, 0],
+      "lower_rad": -0.34907, "upper_rad": 1.88496,
+      "role": "index PIP flexion/extension",
+      "parent": "right_index_pp"
+    },
+    "right_middle_abd": {
+      "axis": [0, 0, -1],
+      "lower_rad": -0.64577, "upper_rad": 0.64577,
+      "role": "middle abduction/adduction (symmetric range)",
+      "parent": "right_palm"
+    },
+    "right_middle_mcp": {
+      "axis": [0, -1, 0],
+      "lower_rad": -0.34907, "upper_rad": 1.58825,
+      "role": "middle MCP flexion/extension",
+      "parent": "right_middle_mp"
+    },
+    "right_middle_pip": {
+      "axis": [0, -1, 0],
+      "lower_rad": -0.34907, "upper_rad": 1.8675,
+      "role": "middle PIP flexion/extension",
+      "parent": "right_middle_pp"
+    },
+    "right_ring_abd": {
+      "axis": [0, 0, -1],
+      "lower_rad": -0.47577, "upper_rad": 0.80577,
+      "role": "ring abduction/adduction",
+      "parent": "right_palm"
+    },
+    "right_ring_mcp": {
+      "axis": [0, -1, 0],
+      "lower_rad": -0.34907, "upper_rad": 1.58825,
+      "role": "ring MCP flexion/extension",
+      "parent": "right_ring_mp"
+    },
+    "right_ring_pip": {
+      "axis": [0, -1, 0],
+      "lower_rad": -0.34907, "upper_rad": 1.8675,
+      "role": "ring PIP flexion/extension",
+      "parent": "right_ring_pp"
+    },
+    "right_pinky_abd": {
+      "axis": [0, 0, -1],
+      "lower_rad": -0.12244, "upper_rad": 1.1691,
+      "role": "pinky abduction/adduction (asymmetric — biased outward)",
+      "parent": "right_palm"
+    },
+    "right_pinky_mcp": {
+      "axis": [0, -1, 0],
+      "lower_rad": -0.34907, "upper_rad": 1.71042,
+      "role": "pinky MCP flexion/extension",
+      "parent": "right_pinky_mp"
+    },
+    "right_pinky_pip": {
+      "axis": [0, -1, 0],
+      "lower_rad": -0.34907, "upper_rad": 1.88496,
+      "role": "pinky PIP flexion/extension",
+      "parent": "right_pinky_pp"
+    }
+  },
+
+  "links": {
+    "right_palm": {
+      "mass_kg": 0.0257,
+      "com_xyz_m": [0.00193, -0.00052, -0.00664],
+      "inertia": { "ixx": 1.612e-5, "iyy": 1.151e-5, "izz": 6.72e-6 }
+    },
+    "right_thumb_mp":  { "mass_kg": 0.00586, "com_xyz_m": [0.00247, 0.0, 0.004] },
+    "right_thumb_pp":  { "mass_kg": 0.00655, "com_xyz_m": [0.01848, 0.00001, 0.00002] },
+    "right_thumb_ip":  { "mass_kg": 0.01402, "com_xyz_m": [0.00135, 0.00002, 0.01383] },
+    "right_thumb_dp":  { "mass_kg": 0.01320, "com_xyz_m": [0.00233, 0.00001, 0.01133] },
+    "right_index_mp":  { "mass_kg": 0.00498, "com_xyz_m": [0.01155, 0.0, -0.00004] },
+    "right_index_pp":  { "mass_kg": 0.01650, "com_xyz_m": [0.00135, 0.00002, 0.01637] },
+    "right_index_ip":  { "mass_kg": 0.01521, "com_xyz_m": [0.00071, 0.00001, 0.01929] },
+    "right_middle_mp": { "mass_kg": 0.00498, "com_xyz_m": [0.01155, 0.0, -0.00004] },
+    "right_middle_pp": { "mass_kg": 0.02006, "com_xyz_m": [0.00144, 0.00002, 0.02021] },
+    "right_middle_ip": { "mass_kg": 0.01521, "com_xyz_m": [0.00071, 0.00001, 0.01929] },
+    "right_ring_mp":   { "mass_kg": 0.00498, "com_xyz_m": [0.01155, 0.0, -0.00004] },
+    "right_ring_pp":   { "mass_kg": 0.02006, "com_xyz_m": [0.00144, 0.00002, 0.02021] },
+    "right_ring_ip":   { "mass_kg": 0.01521, "com_xyz_m": [0.00071, 0.00001, 0.01929] },
+    "right_pinky_mp":  { "mass_kg": 0.00498, "com_xyz_m": [0.01155, 0.0, -0.00004] },
+    "right_pinky_pp":  { "mass_kg": 0.01402, "com_xyz_m": [0.00135, 0.00002, 0.01383] },
+    "right_pinky_ip":  { "mass_kg": 0.01521, "com_xyz_m": [0.00071, 0.00001, 0.01929] }
+  },
+
+  "gravity_notes": "Tower (0.9 kg) is fixed mount — no gravitational load on hand DOFs. Palm (25.7 g) loads right_wrist when hand is not vertical. Finger segments (5–20 g each) create joint torques during open or extended poses. Gravity vector: [0, 0, -9.81] m/s².",
+
+  "known_limitations": [
+    "No tendon routing geometry in URDF — coupling ratios are estimates",
+    "Effort limits (100 Nm) are URDF defaults, not hardware specs",
+    "No joint damping or friction in URDF — dynamics values are estimated",
+    "No contact geometry beyond visual meshes",
+    "DIP joints on index/middle/ring/pinky are fixed in URDF (no distal phalanx DOF)",
+    "Thumb has 4 actuated DOFs; other fingers have 3 each (no DIP)"
+  ]
+}
