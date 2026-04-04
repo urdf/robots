@@ -1,0 +1,69 @@
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- LOGIC LEVEL CONVERTER (bidirectional, 3.3 V ↔ 5 V)            -->
+  <!-- PCB: 25 × 18 × 1.6 mm blue; 4 BSS138 MOSFETs; pin rails      -->
+  <!-- Mounted on top of chassis, between L298N and ESP32-CAM        -->
+  <!-- Sub-visuals:                                                     -->
+  <!--   1. PCB — 25 × 18 × 1.6 mm blue box                         -->
+  <!--   2. MOSFETs — 4 × (3 × 3 × 1.5 mm) chips in a row           -->
+  <!--   3–4. Pin header rails — HV and LV sides                      -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="logic_level_converter">
+
+    <!-- PCB (blue) -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.025 0.018 0.0016"/></geometry>
+      <material name="pcb_llc_blue">
+        <color rgba="0.10 0.35 0.65 1.00"/>
+      </material>
+    </visual>
+
+    <!-- BSS138 MOSFETs ×4 (row along X) -->
+    <visual>
+      <origin xyz="-0.009 0 0.0023" rpy="0 0 0"/>
+      <geometry><box size="0.003 0.003 0.0015"/></geometry>
+      <material name="ic_black"><color rgba="0.12 0.12 0.14 1.00"/></material>
+    </visual>
+    <visual>
+      <origin xyz="-0.003 0 0.0023" rpy="0 0 0"/>
+      <geometry><box size="0.003 0.003 0.0015"/></geometry>
+      <material name="ic_black"><color rgba="0.12 0.12 0.14 1.00"/></material>
+    </visual>
+    <visual>
+      <origin xyz="0.003 0 0.0023" rpy="0 0 0"/>
+      <geometry><box size="0.003 0.003 0.0015"/></geometry>
+      <material name="ic_black"><color rgba="0.12 0.12 0.14 1.00"/></material>
+    </visual>
+    <visual>
+      <origin xyz="0.009 0 0.0023" rpy="0 0 0"/>
+      <geometry><box size="0.003 0.003 0.0015"/></geometry>
+      <material name="ic_black"><color rgba="0.12 0.12 0.14 1.00"/></material>
+    </visual>
+
+    <!-- HV pin header rail (+Y side) -->
+    <visual>
+      <origin xyz="0 0.0085 0.0041" rpy="0 0 0"/>
+      <geometry><box size="0.025 0.001 0.005"/></geometry>
+      <material name="header_black"><color rgba="0.10 0.10 0.10 1.00"/></material>
+    </visual>
+
+    <!-- LV pin header rail (−Y side) -->
+    <visual>
+      <origin xyz="0 -0.0085 0.0041" rpy="0 0 0"/>
+      <geometry><box size="0.025 0.001 0.005"/></geometry>
+      <material name="header_black"><color rgba="0.10 0.10 0.10 1.00"/></material>
+    </visual>
+
+    <!-- LLC module ~3 g -->
+    <inertial>
+      <mass value="0.003"/>
+      <inertia ixx="9.72e-8" ixy="0" ixz="0" iyy="1.62e-7" iyz="0" izz="2.21e-7"/>
+    </inertial>
+  </link>
+
+  <joint name="logic_level_converter_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="logic_level_converter"/>
+    <!-- Top of chassis, between L298N (+X) and ESP32-CAM (−X), offset to +Y side -->
+    <origin xyz="0.010 0.040 0.0023" rpy="0 0 0"/>
+  </joint>

@@ -9,6 +9,9 @@
     "05-motor-driver.xml",
     "06-power.xml",
     "07-esp32cam.xml",
-    "08-hcsr04.xml"
+    "08-hcsr04.xml",
+    "09-encoders.xml",
+    "10-ir-sensor.xml",
+    "11-logic-level-converter.xml"
   ]
 }

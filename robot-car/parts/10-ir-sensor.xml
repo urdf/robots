@@ -1,0 +1,60 @@
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- MH SENSOR SERIES (IR)                                           -->
+  <!-- PCB: 33 × 10 × 4 mm green; potentiometer + 2 IR pairs        -->
+  <!-- Mounted under front chassis, flat, sensors pointing −Z (down)  -->
+  <!-- Sub-visuals:                                                     -->
+  <!--   1. PCB — 33 × 10 × 4 mm green box                           -->
+  <!--   2. Potentiometer — 6 × 6 × 5 mm box, top face               -->
+  <!--   3–4. IR emitter + receiver — ø5 × 2 mm cylinders, bottom    -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <link name="ir_sensor">
+
+    <!-- PCB (green) -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.033 0.010 0.004"/></geometry>
+      <material name="pcb_ir_green">
+        <color rgba="0.10 0.45 0.10 1.00"/>
+      </material>
+    </visual>
+
+    <!-- Potentiometer (blue box, top face) -->
+    <visual>
+      <origin xyz="0.008 0 0.0045" rpy="0 0 0"/>
+      <geometry><box size="0.006 0.006 0.005"/></geometry>
+      <material name="pot_blue">
+        <color rgba="0.10 0.30 0.75 1.00"/>
+      </material>
+    </visual>
+
+    <!-- IR emitter (−X side, bottom face) -->
+    <visual>
+      <origin xyz="-0.008 0 -0.003" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.0025" length="0.002"/></geometry>
+      <material name="ir_dark">
+        <color rgba="0.12 0.12 0.14 1.00"/>
+      </material>
+    </visual>
+
+    <!-- IR receiver (+X side, bottom face) -->
+    <visual>
+      <origin xyz="0.008 0 -0.003" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.0025" length="0.002"/></geometry>
+      <material name="ir_dark">
+        <color rgba="0.12 0.12 0.14 1.00"/>
+      </material>
+    </visual>
+
+    <!-- IR sensor module ~5 g -->
+    <inertial>
+      <mass value="0.005"/>
+      <inertia ixx="1.20e-7" ixy="0" ixz="0" iyy="4.60e-7" iyz="0" izz="5.15e-7"/>
+    </inertial>
+  </link>
+
+  <joint name="ir_sensor_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="ir_sensor"/>
+    <!-- Front-centre underside; PCB centre just below chassis bottom (−1.5 mm) -->
+    <origin xyz="-0.090 0.000 -0.0040" rpy="0 0 0"/>
+  </joint>

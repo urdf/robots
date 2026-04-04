@@ -1,0 +1,69 @@
+  <!-- ─────────────────────────────────────────────────────────────── -->
+  <!-- WHEEL ENCODERS (×2)                                             -->
+  <!-- Black optical encoder disc on each motor output shaft          -->
+  <!-- Disc: ø24 mm × 2 mm; hub: ø6 mm × 4 mm                       -->
+  <!-- Parent: motor_right / motor_left (positions in motor frame)    -->
+  <!--                                                                  -->
+  <!-- motor_right: shaft at (0, +0.014, +0.009) in link frame       -->
+  <!-- motor_left:  shaft at (0, −0.014, −0.009) — flipped 180° X    -->
+  <!-- ─────────────────────────────────────────────────────────────── -->
+
+  <!-- RIGHT ENCODER -->
+  <link name="encoder_right">
+    <!-- Disc: ø24 mm × 2 mm; rpy flips cylinder Z-axis → +Y (shaft axis) -->
+    <visual>
+      <origin xyz="0 0 0" rpy="-1.5708 0 0"/>
+      <geometry><cylinder radius="0.012" length="0.002"/></geometry>
+      <material name="encoder_black">
+        <color rgba="0.10 0.10 0.10 1.00"/>
+      </material>
+    </visual>
+    <!-- Hub: ø6 mm × 4 mm — centre boss over shaft -->
+    <visual>
+      <origin xyz="0 0 0" rpy="-1.5708 0 0"/>
+      <geometry><cylinder radius="0.003" length="0.004"/></geometry>
+      <material name="encoder_hub">
+        <color rgba="0.30 0.30 0.33 1.00"/>
+      </material>
+    </visual>
+    <!-- encoder disc ~2 g -->
+    <inertial>
+      <mass value="0.002"/>
+      <inertia ixx="7.20e-8" ixy="0" ixz="0" iyy="7.20e-8" iyz="0" izz="1.44e-7"/>
+    </inertial>
+  </link>
+  <joint name="encoder_right_joint" type="fixed">
+    <parent link="motor_right"/>
+    <child link="encoder_right"/>
+    <!-- Shaft centre in motor_right frame; disc sits just inside gearbox face -->
+    <origin xyz="0 0.012 0.009" rpy="0 0 0"/>
+  </joint>
+
+  <!-- LEFT ENCODER -->
+  <link name="encoder_left">
+    <!-- motor_left visuals are flipped 180° around X (shaft → −Y, z → −Z) -->
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.012" length="0.002"/></geometry>
+      <material name="encoder_black">
+        <color rgba="0.10 0.10 0.10 1.00"/>
+      </material>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.003" length="0.004"/></geometry>
+      <material name="encoder_hub">
+        <color rgba="0.30 0.30 0.33 1.00"/>
+      </material>
+    </visual>
+    <inertial>
+      <mass value="0.002"/>
+      <inertia ixx="7.20e-8" ixy="0" ixz="0" iyy="7.20e-8" iyz="0" izz="1.44e-7"/>
+    </inertial>
+  </link>
+  <joint name="encoder_left_joint" type="fixed">
+    <parent link="motor_left"/>
+    <child link="encoder_left"/>
+    <!-- Mirror of right: shaft at −Y, −Z after mesh flip -->
+    <origin xyz="0 -0.012 -0.009" rpy="0 0 0"/>
+  </joint>
